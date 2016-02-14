@@ -23,7 +23,7 @@ class Lista():
             self.lista = nodo
         else:
             copiaLista = self.lista
-            while copiaLista.siguiente!=None:
+            while copiaLista.siguiente != None:
                 copiaLista = copiaLista.siguiente
             copiaLista.siguiente = nodo
 
@@ -36,7 +36,7 @@ class Lista():
         else:
             copiaLista = self.lista
             listaAuxiliar = None
-            while  (copiaLista!=None) and (nodo.comparar(copiaLista.datos)>=0): # el orden de la comprobacion importa
+            while  (copiaLista != None) and (nodo.comparar(copiaLista.datos) >= 0): # el orden de la comprobacion importa
                 listaAuxiliar = copiaLista
                 copiaLista = copiaLista.siguiente
             nodo.siguiente = copiaLista
@@ -49,7 +49,7 @@ class Lista():
         copiaLista = self.lista
         listaAuxiliar = None
         encontrado = False
-        while(copiaLista!=None and not encontrado):
+        while((copiaLista != None) and (not encontrado)):
             encontrado = (copiaLista.comparar(datosABorrar) == 0)
             if not encontrado:
                 listaAuxiliar = copiaLista
@@ -63,7 +63,7 @@ class Lista():
             copiaLista = copiaLista.siguiente
             del nodoABorrar
             if modo != 1:
-                while(copiaLista!=None):
+                while(copiaLista != None):
                     if(copiaLista.comparar(datosABorrar) == 0):
                         if listaAuxiliar == None:
                             self.lista = copiaLista.siguiente
@@ -87,7 +87,7 @@ class Lista():
                     if mirarNodo.comparar(listaAuxiliar.datos)>0: 
                         mirarNodo = listaAuxiliar
                     listaAuxiliar = listaAuxiliar.siguiente
-                if mirarNodo!=copiaLista: 
+                if mirarNodo != copiaLista: 
                     datos = mirarNodo.datos
                     mirarNodo.datos = copiaLista.datos
                     copiaLista.datos = datos
@@ -97,7 +97,7 @@ class Lista():
 
     def existe(self,datosNodo):
         copiaLista = self.lista
-        while copiaLista!=None:
+        while copiaLista != None:
             if copiaLista.comparar(datosNodo) == 0:
                 return True
             copiaLista = copiaLista.siguiente
@@ -117,7 +117,7 @@ class Lista():
     def longitud(self):
         copiaLista = self.lista
         cont = 0
-        while copiaLista!=None:
+        while copiaLista != None:
             cont += 1
             copiaLista = copiaLista.siguiente
         return cont
@@ -127,7 +127,7 @@ class Lista():
         cont = 0
         while copiaLista!=None:
             print(copiaLista.datos, end=" ")
-            cont +=1
+            cont += 1
             if cont%12 == 0:
                 print()
             copiaLista = copiaLista.siguiente
