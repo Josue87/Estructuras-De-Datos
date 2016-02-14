@@ -1,3 +1,4 @@
+#!usr/bin/python3
 __author__ = 'josue'
 from Lista import Lista
 import random
