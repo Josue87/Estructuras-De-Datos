@@ -45,12 +45,12 @@ class Lista():
             else:
                 listaAuxiliar.siguiente = nodo
 
-    def eliminar(self, nodoABorrar, modo = 1): # si modo es distinto a 1 se eliminan todas las apariciones, si no la primera
+    def eliminar(self, datosABorrar, modo = 1): # si modo es distinto a 1 se eliminan todas las apariciones, si no la primera
         copiaLista = self.lista
         listaAuxiliar = None
         encontrado = False
         while(copiaLista!=None and not encontrado):
-            encontrado = (copiaLista.comparar(nodoABorrar) == 0)
+            encontrado = (copiaLista.comparar(datosABorrar) == 0)
             if not encontrado:
                 listaAuxiliar = copiaLista
                 copiaLista = copiaLista.siguiente
@@ -59,19 +59,19 @@ class Lista():
                 self.lista = copiaLista.siguiente
             else:
                     listaAuxiliar.siguiente = copiaLista.siguiente
-            borrar = copiaLista
+            nodoABorrar = copiaLista
             copiaLista = copiaLista.siguiente
-            del borrar
+            del nodoABorrar
             if modo != 1:
                 while(copiaLista!=None):
-                    if(copiaLista.comparar(nodoABorrar) == 0):
+                    if(copiaLista.comparar(datosABorrar) == 0):
                         if listaAuxiliar == None:
                             self.lista = copiaLista.siguiente
                         else:
                             listaAuxiliar.siguiente = copiaLista.siguiente
-                        borrar = copiaLista
+                        nodoABorrar = copiaLista
                         copiaLista = copiaLista.siguiente
-                        del borrar
+                        del nodoABorrar
                     else:
                         listaAuxiliar = copiaLista
                         copiaLista = copiaLista.siguiente
@@ -95,10 +95,10 @@ class Lista():
 
 
 
-    def existe(self,nodo):
+    def existe(self,datosNodo):
         copiaLista = self.lista
         while copiaLista!=None:
-            if copiaLista.comparar(nodo) == 0:
+            if copiaLista.comparar(datosNodo) == 0:
                 return True
             copiaLista = copiaLista.siguiente
         return False
@@ -132,7 +132,3 @@ class Lista():
                 print()
             copiaLista = copiaLista.siguiente
         print()
-
-
-
-
