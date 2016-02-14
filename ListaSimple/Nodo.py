@@ -6,11 +6,12 @@ class Nodo():
         self.datos = None
         self.siguiente = None
 
-    def comparar(self, nodo):
-        if self.datos > nodo:
+    def comparar(self, datosNodo):
+        if self.datos > datosNodo:
             return 1
-        elif self.datos < nodo:
+        elif self.datos < datosNodo:
             return -1
         else:
             return 0
+
 
