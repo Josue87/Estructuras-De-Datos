@@ -6,101 +6,101 @@ class Lista():
     def __init__(self):
         self.lista = None
 
-    def insertarPrimero(self, dat):
+    def insertarPrimero(self, datosAInsertar):
         nodo = Nodo()
-        nodo.datos = dat
+        nodo.datos = datosAInsertar
         if self.esVacia():
-            nodo.sig = None
+            nodo.siguiente = None
         else:
-            nodo.sig = self.lista
+            nodo.siguiente = self.lista
         self.lista = nodo
 
-    def insertarUltimo(self, dat):
+    def insertarUltimo(self, datosAInsertar):
         nodo = Nodo()
-        nodo.datos = dat
-        nodo.sig = None
+        nodo.datos = datosAInsertar
+        nodo.siguiente = None
         if self.esVacia():
             self.lista = nodo
         else:
-            l = self.lista
-            while l.sig!=None:
-                l = l.sig
-            l.sig = nodo
+            copiaLista = self.lista
+            while copiaLista.siguiente!=None:
+                copiaLista = copiaLista.siguiente
+            copiaLista.siguiente = nodo
 
-    def insertarOrdenado(self, dat): # si la lista esta desordenada, no hace maravillas
+    def insertarOrdenado(self, datosAInsertar): # si la lista esta desordenada, no hace maravillas
         nodo = Nodo()
-        nodo.datos = dat
+        nodo.datos = datosAInsertar
         if self.esVacia():
-            nodo.sig = None
+            nodo.siguiente = None
             self.lista = nodo
         else:
-            l1 = self.lista
-            l2 = None
-            while  (l1!=None) and (nodo.comparar(l1.datos)>=0): # el orden de la comprobación importa
-                l2 = l1
-                l1 = l1.sig
-            nodo.sig = l1
-            if l2 == None: 
+            copiaLista = self.lista
+            listaAuxiliar = None
+            while  (copiaLista!=None) and (nodo.comparar(copiaLista.datos)>=0): # el orden de la comprobacion importa
+                listaAuxiliar = copiaLista
+                copiaLista = copiaLista.siguiente
+            nodo.siguiente = copiaLista
+            if listaAuxiliar == None: 
                 self.lista = nodo
             else:
-                l2.sig = nodo
+                listaAuxiliar.siguiente = nodo
 
-    def eliminar(self, n, modo = 1): # si modo es distinto a 1 se eliminan todas las apariciones, si no la primera
-        l = self.lista
-        laux = None
+    def eliminar(self, nodoABorrar, modo = 1): # si modo es distinto a 1 se eliminan todas las apariciones, si no la primera
+        copiaLista = self.lista
+        listaAuxiliar = None
         encontrado = False
-        while(l!=None and not encontrado):
-            encontrado = (l.comparar(n) == 0)
+        while(copiaLista!=None and not encontrado):
+            encontrado = (copiaLista.comparar(nodoABorrar) == 0)
             if not encontrado:
-                laux = l
-                l = l.sig
+                listaAuxiliar = copiaLista
+                copiaLista = copiaLista.siguiente
         if encontrado:
-            if laux == None:
-                self.lista = l.sig
+            if listaAuxiliar == None:
+                self.lista = copiaLista.siguiente
             else:
-                    laux.sig = l.sig
-            aux = l
-            l = l.sig
-            del aux
+                    listaAuxiliar.siguiente = copiaLista.siguiente
+            borrar = copiaLista
+            copiaLista = copiaLista.siguiente
+            del borrar
             if modo != 1:
-                while(l!=None):
-                    if(l.comparar(n) == 0):
-                        if laux == None:
-                            self.lista = l.sig
+                while(copiaLista!=None):
+                    if(copiaLista.comparar(nodoABorrar) == 0):
+                        if listaAuxiliar == None:
+                            self.lista = copiaLista.siguiente
                         else:
-                            laux.sig = l.sig
-                        aux = l
-                        l = l.sig
-                        del aux
+                            listaAuxiliar.siguiente = copiaLista.siguiente
+                        borrar = copiaLista
+                        copiaLista = copiaLista.siguiente
+                        del borrar
                     else:
-                        laux = l
-                        l = l.sig
+                        listaAuxiliar = copiaLista
+                        copiaLista = copiaLista.siguiente
 
 
     def ordenar(self):
         if self.longitud()>1: 
-            l = self.lista
-            while l != None:
-                l2 = l.sig
-                aux = l
-                while l2 != None:
-                    if aux.comparar(l2.datos)>0: 
-                        aux = l2
-                    l2 = l2.sig
-                if aux!=l: 
-                    dat = aux.datos
-                    aux.datos = l.datos
-                    l.datos = dat
-                l = l.sig
+            copiaLista = self.lista
+            while copiaLista != None:
+                listaAuxiliar = copiaLista.siguiente
+                mirarNodo = copiaLista
+                while listaAuxiliar != None:
+                    if mirarNodo.comparar(listaAuxiliar.datos)>0: 
+                        mirarNodo = listaAuxiliar
+                    listaAuxiliar = listaAuxiliar.siguiente
+                if mirarNodo!=copiaLista: 
+                    datos = mirarNodo.datos
+                    mirarNodo.datos = copiaLista.datos
+                    copiaLista.datos = datos
+                copiaLista = copiaLista.siguiente
 
 
 
-    def existe(self,n):
-        l = self.lista
-        while l!=None:
-            if l.comparar(n) == 0:
+    def existe(self,nodo):
+        copiaLista = self.lista
+        while copiaLista!=None:
+            if copiaLista.comparar(nodo) == 0:
                 return True
-            l = l.sig
+            copiaLista = copiaLista.siguiente
         return False
 
 
@@ -115,23 +115,24 @@ class Lista():
         return self.lista == None
 
     def longitud(self):
-        l = self.lista
+        copiaLista = self.lista
         cont = 0
-        while l!=None:
+        while copiaLista!=None:
             cont += 1
-            l = l.sig
+            copiaLista = copiaLista.siguiente
         return cont
 
     def visualizar(self):
-        l = self.lista
+        copiaLista = self.lista
         cont = 0
-        while l!=None:
-            print(l.datos, end=" ")
+        while copiaLista!=None:
+            print(copiaLista.datos, end=" ")
             cont +=1
             if cont%12 == 0:
                 print()
-            l = l.sig
+            copiaLista = copiaLista.siguiente
         print()
+
 
 
 
