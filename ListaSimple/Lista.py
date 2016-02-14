@@ -1,3 +1,4 @@
+#!usr/bin/python3
 __author__ = 'josue'
 from Nodo import Nodo
 
@@ -39,12 +40,12 @@ class Lista():
                 l2 = l1
                 l1 = l1.sig
             nodo.sig = l1
-            if l2 == None: # insertaremos en primer lugar
+            if l2 == None: 
                 self.lista = nodo
-            else: # nos da igual si es el último o esta en medio
+            else:
                 l2.sig = nodo
 
-    def eliminar(self, n, modo = 1): # modo 1 eliminar 1 aparicion, otro numero eliminara todas
+    def eliminar(self, n, modo = 1): # si modo es distinto a 1 se eliminan todas las apariciones, si no la primera
         l = self.lista
         laux = None
         encontrado = False
@@ -77,17 +78,16 @@ class Lista():
 
 
     def ordenar(self):
-        if self.longitud()>1: # si tenemos algo que ordenar
+        if self.longitud()>1: 
             l = self.lista
-
             while l != None:
                 l2 = l.sig
                 aux = l
                 while l2 != None:
-                    if aux.comparar(l2.datos)>0: # hay un elemento menor
+                    if aux.comparar(l2.datos)>0: 
                         aux = l2
                     l2 = l2.sig
-                if aux!=l: # tenemos que ordenar
+                if aux!=l: 
                     dat = aux.datos
                     aux.datos = l.datos
                     l.datos = dat
@@ -109,7 +109,7 @@ class Lista():
         if self.esVacia():
             return None
         else:
-            return self.lista.datos # solo nos interesa devolver los datos
+            return self.lista.datos
 
     def esVacia(self):
         return self.lista == None
