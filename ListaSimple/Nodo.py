@@ -4,12 +4,13 @@ __author__ = 'josue'
 class Nodo():
     def __init__(self):
         self.datos = None
-        self.sig = None
+        self.siguiente = None
 
-    def comparar(self, n):
-        if self.datos > n:
+    def comparar(self, nodo):
+        if self.datos > nodo:
             return 1
-        elif self.datos < n:
+        elif self.datos < nodo:
             return -1
         else:
             return 0
+
